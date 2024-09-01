@@ -219,19 +219,24 @@
             return operand1 * operand2;
         }
         
-        function displayResult() {
-            const displayedTable = tablesDiv.textContent.trim();
-            const result = evaluateMultiplication(displayedTable);
-            tablesDiv.innerHTML = `<div class="table">${result}</div>`;
+        function displayResults() {
+            tablesDiv.innerHTML = '';
+            eliminatedTables.forEach(table => {
+                const result = evaluateMultiplication(table);
+                const div = document.createElement('div');
+                div.className = 'table';
+                div.textContent = `${table} = ${result}`;
+                tablesDiv.appendChild(div);
+            });
             bingoBtn.classList.add('hidden');
             continueBtn.classList.remove('hidden');
         }
-        
+
         function start() {
             startBtn.classList.add('hidden');
             stopBtn.classList.remove('hidden');
-            bingoBtn.classList.remove('hidden'); // Mostrar botón Bingo
             tablesDiv.classList.remove('hidden');
+            bingoBtn.classList.remove('hidden'); // Asegura que el botón Bingo esté visible
             
             intervalId = setInterval(displayRandomTable, 100);
         }
@@ -292,7 +297,7 @@
         stopBtn.addEventListener('click', stop);
         continueBtn.addEventListener('click', continueDisplay);
         resetBtn.addEventListener('click', reset);
-        bingoBtn.addEventListener('click', displayResult); // Evento para el botón Bingo
+        bingoBtn.addEventListener('click', displayResults); // Evento para el botón Bingo
     </script>
 </body>
 </html>

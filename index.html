@@ -169,7 +169,7 @@
         <button id="stop-btn" class="hidden">Stop</button>
         <button id="continue-btn" class="hidden">Continuar</button>
         <button id="reset-btn">Reiniciar</button>
-        <button id="bingo-btn" class="hidden">Bingo</button> <!-- Nuevo botón -->
+        <button id="bingo-btn">Bingo</button> <!-- Botón Bingo siempre visible -->
     </div>
 
     <div id="mini-table"></div>
@@ -196,7 +196,7 @@
         const stopBtn = document.getElementById('stop-btn');
         const continueBtn = document.getElementById('continue-btn');
         const resetBtn = document.getElementById('reset-btn');
-        const bingoBtn = document.getElementById('bingo-btn'); // Nuevo botón
+        const bingoBtn = document.getElementById('bingo-btn'); // Botón Bingo
         const tablesDiv = document.getElementById('tables');
         const miniTable = document.getElementById('mini-table');
 
@@ -240,7 +240,7 @@
             clearInterval(intervalId);
             stopBtn.classList.add('hidden');
             continueBtn.classList.remove('hidden');
-            bingoBtn.classList.add('hidden'); // Ocultar botón Bingo
+            bingoBtn.classList.remove('hidden'); // Asegura que el botón Bingo esté visible
         }
         
         function continueDisplay() {
@@ -284,7 +284,7 @@
             startBtn.classList.remove('hidden');
             stopBtn.classList.add('hidden');
             continueBtn.classList.add('hidden');
-            bingoBtn.classList.add('hidden'); // Ocultar botón Bingo
+            bingoBtn.classList.remove('hidden'); // Asegura que el botón Bingo esté visible
             clearInterval(intervalId);
         }
 

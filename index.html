@@ -169,6 +169,7 @@
         <button id="stop-btn" class="hidden">Stop</button>
         <button id="continue-btn" class="hidden">Continuar</button>
         <button id="reset-btn">Reiniciar</button>
+        <button id="bingo-btn" class="hidden">Bingo</button> <!-- Nuevo botón -->
     </div>
 
     <div id="mini-table"></div>
@@ -195,6 +196,7 @@
         const stopBtn = document.getElementById('stop-btn');
         const continueBtn = document.getElementById('continue-btn');
         const resetBtn = document.getElementById('reset-btn');
+        const bingoBtn = document.getElementById('bingo-btn'); // Nuevo botón
         const tablesDiv = document.getElementById('tables');
         const miniTable = document.getElementById('mini-table');
 
@@ -211,10 +213,24 @@
             const randomTable = getRandomTable();
             tablesDiv.innerHTML = `<div class="table">${randomTable}</div>`;
         }
+
+        function evaluateMultiplication(expression) {
+            const [operand1, , operand2] = expression.split(' ');
+            return operand1 * operand2;
+        }
+        
+        function displayResult() {
+            const displayedTable = tablesDiv.textContent.trim();
+            const result = evaluateMultiplication(displayedTable);
+            tablesDiv.innerHTML = `<div class="table">${result}</div>`;
+            bingoBtn.classList.add('hidden');
+            continueBtn.classList.remove('hidden');
+        }
         
         function start() {
             startBtn.classList.add('hidden');
             stopBtn.classList.remove('hidden');
+            bingoBtn.classList.remove('hidden'); // Mostrar botón Bingo
             tablesDiv.classList.remove('hidden');
             
             intervalId = setInterval(displayRandomTable, 100);
@@ -224,6 +240,7 @@
             clearInterval(intervalId);
             stopBtn.classList.add('hidden');
             continueBtn.classList.remove('hidden');
+            bingoBtn.classList.add('hidden'); // Ocultar botón Bingo
         }
         
         function continueDisplay() {
@@ -267,6 +284,7 @@
             startBtn.classList.remove('hidden');
             stopBtn.classList.add('hidden');
             continueBtn.classList.add('hidden');
+            bingoBtn.classList.add('hidden'); // Ocultar botón Bingo
             clearInterval(intervalId);
         }
 
@@ -274,6 +292,7 @@
         stopBtn.addEventListener('click', stop);
         continueBtn.addEventListener('click', continueDisplay);
         resetBtn.addEventListener('click', reset);
+        bingoBtn.addEventListener('click', displayResult); // Evento para el botón Bingo
     </script>
 </body>
 </html>

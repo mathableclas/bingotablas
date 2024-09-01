@@ -220,12 +220,21 @@
         }
 
         function displayResults() {
-            const miniTableDivs = miniTable.querySelectorAll('div');
-            miniTableDivs.forEach(div => {
-                const text = div.textContent;
+            // Reemplaza los elementos en miniTable con los resultados
+            Array.from(miniTable.children).forEach(div => {
+                const text = div.textContent.trim();
                 const result = evaluateMultiplication(text);
-                div.textContent = `${text} = ${result}`;
-                div.classList.add('table'); // Añade clase para mantener el estilo
+                div.textContent = result;
+            });
+        }
+
+        function revertResults() {
+            // Reemplaza los elementos en miniTable con las tablas originales
+            miniTable.innerHTML = '';
+            eliminatedTables.forEach(table => {
+                const div = document.createElement('div');
+                div.textContent = table;
+                miniTable.appendChild(div);
             });
         }
 
@@ -295,6 +304,7 @@
         continueBtn.addEventListener('click', continueDisplay);
         resetBtn.addEventListener('click', reset);
         bingoBtn.addEventListener('click', displayResults); // Evento para el botón Bingo
+
     </script>
 </body>
 </html>

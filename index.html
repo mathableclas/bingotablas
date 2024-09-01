@@ -218,18 +218,15 @@
             const [operand1, , operand2] = expression.split(' ');
             return operand1 * operand2;
         }
-        
+
         function displayResults() {
-            tablesDiv.innerHTML = '';
-            eliminatedTables.forEach(table => {
-                const result = evaluateMultiplication(table);
-                const div = document.createElement('div');
-                div.className = 'table';
-                div.textContent = `${table} = ${result}`;
-                tablesDiv.appendChild(div);
+            const miniTableDivs = miniTable.querySelectorAll('div');
+            miniTableDivs.forEach(div => {
+                const text = div.textContent;
+                const result = evaluateMultiplication(text);
+                div.textContent = `${text} = ${result}`;
+                div.classList.add('table'); // Añade clase para mantener el estilo
             });
-            bingoBtn.classList.add('hidden');
-            continueBtn.classList.remove('hidden');
         }
 
         function start() {
